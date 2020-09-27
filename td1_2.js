@@ -18,7 +18,7 @@ function test() {
     Affiche(x);
     x = [1, 2, 3];
     Affiche(x);
-    x = new Array();
+    x = [];
     Affiche(x);
     x = {};
     Affiche(x);
@@ -253,18 +253,81 @@ function addition() {
 //addition();
 
 function compteur() {
-    let tableau2 = [1, 2, 5, 9, 7,20];
-    let compteur=0;
+    let tableau2 = [1, 2, 5, 9, 7, 20];
+    let compteur = 0;
 
     for (let i = 0; i < tableau2.length; i++) {
         let coupe = tableau2[i] / 2;
         if (tableau2[i] === Math.floor(tableau2[i])) {
-            if (coupe ===Math.floor(coupe)) {
+            if (coupe === Math.floor(coupe)) {
                 compteur++;
             }
         }
     }
-console.log(compteur);
-
+    console.log(compteur);
 }
-compteur();
+
+//compteur();
+
+function concatenation() {
+    let tab1 = [1, 3, 5];
+    let tab2 = [2, 4, 6];
+    let tab3 = tab1.concat(tab2);
+    let tmp;
+    let nombre = 0;
+    let nombrePrecis = 0;
+    let longeur = tab3.length;
+
+    for (let i = 0; i < (longeur - 1); i++) {
+        nombrePrecis = nombre;
+        for (let j = 0; j < longeur; j++) {
+            if (tab3[j + 1] < tab3[j]) {
+                tmp = tab3[j];
+                tab3[j] = tab3[j + 1];
+                tab3[j + 1] = tmp;
+                nombre++;
+            }
+        }
+    }
+    console.log("tab1 : " + tab1);
+    console.log("tab2 : " + tab2);
+    console.log("tab3 : " + tab3);
+}
+
+//concatenation();
+
+//dichotomie non reussi
+
+function pairGrand() {
+    let tmp;
+    let tab1 = [1, 2, 151, 222, 853];
+    let tab2 = [];
+    for (let i = 0; i < tab1.length; i++) {
+        if (tab1[i] % 2 === 0) {
+
+            tab2[i] = tab1[i];
+        }
+
+    }
+    console.log(tab2)
+    tmp = 0;
+    for (i = 0; i < tab2.length; i++) {
+        tab2 = tab2.filter(function (val) {
+            return val !== ''
+        });
+        if (tab2[i] > tmp) {
+            tmp = tab2[i];
+        }
+    }
+    console.log(tmp);
+}
+
+//pairGrand();
+
+function occurence() {
+    let msg = "salut salut c'est moi moi moi";
+    msg2 = msg.split(" ");
+    console.log(msg2);
+}
+
+occurence();
