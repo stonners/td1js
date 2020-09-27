@@ -325,30 +325,22 @@ function pairGrand() {
 //pairGrand();
 
 
-//                  !!! L'occurrence ne fonctionne pas !!!
-function occurrence() {
-    let test = {};
-    let msg = "salut salut c'est moi moi moi";
-    msg2 = msg.split(" ");
-    console.log(msg2);
-    for (let i = 0; i < msg2.length; i++) {
-        test[i] = msg2[i];
-    }
-
-    function getMot(test) {
-        k = 0;
-        for (var j = 0; j < test.length; j++) {
-            if (test[1] == test[j]) k++;
+//!!! L'occurrence ne fonctionne pas !!!
+function occurrence(phrase) {
+    let tabPhrase=phrase.split(" ");
+    let tabassoc=new Array();
+    for (i=0;i<tabPhrase.length;i++){
+        let phraseCompt =tabPhrase[i];
+        let compteur=0;
+        for (j=0;j<tabPhrase.length;j++){
+            if (phraseCompt==tabPhrase[j]){
+                compteur++;
+            }
         }
-        return k;
+        tabassoc[tabPhrase[i]]=compteur;
+        
     }
-
-    console.log(test);
-    for (test[1] in test) {
-
-       console.log((test[1]+' : est repeté '+getMot(test[1])+' fois'))
-    }
-
+    console.log(tabassoc);
 }
+occurrence("salut salut c'est moi moi moi");
 
-//occurrence();
