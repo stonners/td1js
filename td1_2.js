@@ -178,7 +178,7 @@ function nmfamille() {
         prenom = prenom.charAt(0).toUpperCase() + prenom.substring(1).toLowerCase();
         prenom2 = prenom2.charAt(0).toUpperCase() + prenom2.substring(1).toLowerCase();
         prenom = prenom + "-" + prenom2;
-    }else {
+    } else {
         prenom = prenom.charAt(0).toUpperCase() + prenom.substring(1).toLowerCase();
     }
     console.log(nom)
@@ -186,7 +186,55 @@ function nmfamille() {
     //console.log(prenom.indexOf("-"));
 }
 
-nmfamille();
+//nmfamille();
+function cryptage() {
+    let phrase = prompt("veuillez entrer votre chaine non cryptés");
+    //phrase = phrase.toLowerCase();
+    //let crypt = phrase.split("a"||"A");
 
+}
+
+cryptage();
+
+function jazzBundle() {
+    let numberJazz = prompt("saisissez un nombre !");
+    let i = 0;
+    while (i < numberJazz) {
+        if (i % 5 === 0 && i % 3 === 0) {
+            console.log(i + " = " + "Jazz Bundle");
+        } else if (i % 5 === 0) {
+            console.log(i + " = " + "Bundle");
+        } else if (i % 3 === 0) {
+            console.log(i + " = " + "Jazz");
+        } else {
+            console.log(i);
+        }
+        i++;
+    }
+}
+
+//jazzBundle();
+
+
+function jazzBundle2() {
+    let numberJazz = prompt("saisissez un nombre !");
+    let i = 0;
+    let affiche;
+    while (i < numberJazz) {
+        if (i % 5 === 0 && i % 3 === 0) {
+            affiche = i + " = " + "Jazz Bundle";
+        } else if (i % 5 === 0) {
+            affiche = i + " = " + "Bundle";
+        } else if (i % 3 === 0) {
+            affiche = i + " = " + "Jazz";
+        } else {
+            affiche = i;
+        }
+        console.log(affiche);
+        i++;
+    }
+}
+
+//jazzBundle2();
 //4les tableaux et fonctions
 
