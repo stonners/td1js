@@ -241,7 +241,7 @@ function jazzBundle2() {
 //4les tableaux et fonctions
 function addition() {
     let calcul = 0;
-    let tableau1 = [1, 2, 3.14,3.95,7];
+    let tableau1 = [1, 2, 3.14, 3.95, 7];
     for (let i = 0; i < tableau1.length; i++) {
         if (tableau1[i] === Math.floor(tableau1[i])) {
             calcul += tableau1[i];
@@ -252,3 +252,19 @@ function addition() {
 
 //addition();
 
+function compteur() {
+    let tableau2 = [1, 2, 5, 9, 7,20];
+    let compteur=0;
+
+    for (let i = 0; i < tableau2.length; i++) {
+        let coupe = tableau2[i] / 2;
+        if (tableau2[i] === Math.floor(tableau2[i])) {
+            if (coupe ===Math.floor(coupe)) {
+                compteur++;
+            }
+        }
+    }
+console.log(compteur);
+
+}
+compteur();
