@@ -191,11 +191,11 @@ function cryptage() {
     let phrase = prompt("veuillez entrer votre chaine non cryptés");
     phrase = phrase.toLowerCase();
     //let crypt = phrase.split("a"||"A");
-    phrase = phrase.replaceAll('a','4').replaceAll('e','3').replaceAll('g','6').replaceAll('i','1').replaceAll('o','0').replaceAll('s','5').replaceAll('z','2');
+    phrase = phrase.replaceAll('a', '4').replaceAll('e', '3').replaceAll('g', '6').replaceAll('i', '1').replaceAll('o', '0').replaceAll('s', '5').replaceAll('z', '2');
     console.log(phrase);
 }
 
-cryptage();
+//cryptage();
 
 function jazzBundle() {
     let numberJazz = prompt("saisissez un nombre !");
@@ -237,5 +237,18 @@ function jazzBundle2() {
 }
 
 //jazzBundle2();
+
 //4les tableaux et fonctions
+function addition() {
+    let calcul = 0;
+    let tableau1 = [1, 2, 3.14,3.95,7];
+    for (let i = 0; i < tableau1.length; i++) {
+        if (tableau1[i] === Math.floor(tableau1[i])) {
+            calcul += tableau1[i];
+        }
+    }
+    console.log(calcul);
+}
+
+//addition();
 
