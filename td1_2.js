@@ -324,10 +324,31 @@ function pairGrand() {
 
 //pairGrand();
 
-function occurence() {
+
+//                  !!! L'occurrence ne fonctionne pas !!!
+function occurrence() {
+    let test = {};
     let msg = "salut salut c'est moi moi moi";
     msg2 = msg.split(" ");
     console.log(msg2);
+    for (let i = 0; i < msg2.length; i++) {
+        test[i] = msg2[i];
+    }
+
+    function getMot(test) {
+        k = 0;
+        for (var j = 0; j < test.length; j++) {
+            if (test[1] == test[j]) k++;
+        }
+        return k;
+    }
+
+    console.log(test);
+    for (test[1] in test) {
+
+       console.log((test[1]+' : est repeté '+getMot(test[1])+' fois'))
+    }
+
 }
 
-occurence();
+//occurrence();
