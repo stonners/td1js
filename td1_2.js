@@ -189,9 +189,10 @@ function nmfamille() {
 //nmfamille();
 function cryptage() {
     let phrase = prompt("veuillez entrer votre chaine non cryptés");
-    //phrase = phrase.toLowerCase();
+    phrase = phrase.toLowerCase();
     //let crypt = phrase.split("a"||"A");
-
+    phrase = phrase.replaceAll('a','4').replaceAll('e','3').replaceAll('g','6').replaceAll('i','1').replaceAll('o','0').replaceAll('s','5').replaceAll('z','2');
+    console.log(phrase);
 }
 
 cryptage();
