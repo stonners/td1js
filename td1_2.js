@@ -325,7 +325,7 @@ function pairGrand() {
 //pairGrand();
 
 
-//!!! L'occurrence ne fonctionne pas !!!
+
 function occurrence(phrase) {
     let tabPhrase=phrase.split(" ");
     let tabassoc=new Array();
@@ -338,7 +338,7 @@ function occurrence(phrase) {
             }
         }
         tabassoc[tabPhrase[i]]=compteur;
-        
+
     }
     console.log(tabassoc);
 }
