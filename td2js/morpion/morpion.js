@@ -45,7 +45,7 @@ function generate_table() {
             cell.setAttribute("onClick", "getId(this.id)");
             cell.setAttribute("width", taille);
             cell.setAttribute("height", taille);
-            cell.setAttribute("value", "0")
+            cell.setAttribute("value", "0");
 
             let cellText = document.createTextNode(" ");
 
@@ -78,6 +78,7 @@ let x = 0;
 let gagne = false;
 
 let finPartie = false;
+
 function getId(id) {
 
     let img = document.createElement("img");
@@ -132,16 +133,18 @@ function getId(id) {
                 }
                 finPartie = true;
                 copy_value();
-                buttonRestart();
 
-
-                console.log("t");
             }
         }
 
+
+    }
+    if (finPartie === true) {
+        button();
     }
 
 }
+
 function regardeColone(col, tab) {
     let gagne = true;
     for (let i = 1; i < tailleMorpion; i++) {
@@ -183,10 +186,26 @@ function regardeDiagonaleInverse(tab) {
     return gagne;
 
 }
-function buttonRestart(){
-    let btn = document.createElement("BUTTON");
-    let text = document.createTextNode("Rejouer");
-    btn.appendChild(text);
-    document.body.appendChild(btn);
-    btn.setAttribute("align","center")
+
+let j = 0;
+function button() {
+    if (j < 1) {
+        let btn = document.createElement("BUTTON");
+        let text = document.createTextNode("Rejouer");
+        btn.appendChild(text);
+        document.body.appendChild(btn);
+        btn.setAttribute("onclick", "restart()");
+        btn.setAttribute("display","block");
+        btn.setAttribute("margin","auto");
+        j++;
+    }
+}
+
+function restart() {
+    tabSupp = document.getElementsByTagName("td");
+    for (let i = 0; i < tabSupp.length; i++) {
+        tabSupp[i].innerText = " ";
+    }
+    gagne = false;
+    finPartie = false;
 }
