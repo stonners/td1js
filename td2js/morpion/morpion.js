@@ -6,7 +6,10 @@ let tailleMorpion;
 do {
     tailleMorpion = prompt("choisissez la taille entre 3 et 8");
 } while (tailleMorpion < 3 || tailleMorpion > 8);
-
+let mode = "simple"
+if (confirm("voulez vous jouer en mode complexe")) {
+    mode = "complexe";
+}
 let score = 0;
 let score2 = 0;
 
@@ -73,7 +76,7 @@ function generate_table() {
 }
 
 generate_table();
-
+let nb = 0;
 let x = 0;
 let gagne = false;
 
@@ -102,47 +105,110 @@ function getId(id) {
 
         }
 
+
         //pour compter les point (en test)
         let tab = document.getElementsByTagName("td");
         for (let i = 0; i < tab.length; i++) {
-            if (parseInt(i / tailleMorpion) === 0 && tab[i].value !== undefined) {
-                gagne = regardeColone(i, tab);
+            if (mode !== "simple") {
+                if (parseInt(i / tailleMorpion) === 0 && tab[i].value !== undefined) {
 
-            }
+                    gagne = regardeColone(i, tab);
+                }
 
-            if (i === 0 && tab[0].value !== undefined && gagne === false) {
-                gagne = regardeDiagonale(tab);
+                if (i === 0 && tab[0].value !== undefined && gagne === false) {
+                    gagne = regardeDiagonale(tab);
+                }
+                if (i === tailleMorpion - 1 && tab[tailleMorpion - 1].value !== undefined && gagne === false) {
+                    gagne = regardeDiagonaleInverse(tab);
+                }
+                if (i % tailleMorpion === 0 && tab[i].value !== undefined && gagne === false) {
+                    gagne = regardeligne(i, tab);
 
-            }
-            if (i === tailleMorpion - 1 && tab[tailleMorpion - 1].value !== undefined && gagne === false) {
-                gagne = regardeDiagonaleInverse(tab);
+                }
 
-            }
-            if (i % tailleMorpion === 0 && tab[i].value !== undefined && gagne === false) {
-                console.log(i);
-                gagne = regardeligne(i, tab);
-
+            } else {
+                if (parseInt(i / tailleMorpion) <= tailleMorpion - 3 && tab[i].value !== undefined) {
+                    gagne = regardeColoneSimple(i, tab);
+                }
+                if (i % tailleMorpion <= tailleMorpion - 3 && tab[i].value !== undefined && gagne === false) {
+                    gagne = regardeLigneSimple(i, tab);
+                }
+                if (parseInt(i / tailleMorpion) <= tailleMorpion - 3 && i % tailleMorpion <= tailleMorpion - 3 && tab[i].value !== undefined && gagne === false) {
+                    gagne = regardeDiagonaleSimple(i, tab);
+                }
+                if (parseInt(i / tailleMorpion) < tailleMorpion - 3 && i % tailleMorpion > 1 && tab[i].value !== undefined && gagne === false) {
+                    gagne = regardeDiagonaleInverseSimple(i, tab);
+                }
             }
             if (gagne === true) {
-
-                if (tab[i].value === "1") {
-                    score += 1;
+                if (nb === 0) {
+                    console.log("test");
+                    if (tab[i].value === "1") {
+                        score += 1;
+                    }
+                    if (tab[i].value === "2") {
+                        score2 += 1;
+                    }
+                    finPartie = true;
+                    copy_value();
+                    nb++;
                 }
-                if (tab[i].value === "2") {
-                    score2 += 1;
-                }
-                finPartie = true;
-                copy_value();
+            }
+        }
+        if(finPartie!==true) {
+            finPartie = true;
+            for (let i = 0; i < tab.length; i++) {
+                if (tab[i].value === undefined) finPartie = false;
 
             }
         }
 
-
     }
     if (finPartie === true) {
         button();
+        gagne = false;
     }
 
+}
+
+function regardeColoneSimple(col, tab) {
+    let gagne = true;
+    for (let i = 1; i <= 2; i++) {
+        if (tab[col].value !== tab[col + tailleMorpion * i].value) {
+            gagne = false;
+        }
+    }
+    return gagne;
+}
+
+function regardeLigneSimple(lig, tab) {
+    let gagne = true;
+    for (let i = 1; i <= 2; i++) {
+        if (tab[lig].value !== tab[lig + i].value) {
+            gagne = false;
+        }
+    }
+    return gagne;
+}
+
+function regardeDiagonaleSimple(pos, tab) {
+    let gagne = true;
+    for (let i = 1; i <= 2; i++) {
+        if (tab[pos].value !== tab[pos + tailleMorpion * i + i].value) {
+            gagne = false;
+        }
+    }
+    return gagne;
+}
+
+function regardeDiagonaleInverseSimple(pos, tab) {
+    let gagne = true;
+    for (let i = 1; i <= 2; i++) {
+        if (tab[pos].value !== tab[pos + tailleMorpion * i - i].value) {
+            gagne = false;
+        }
+    }
+    return gagne;
 }
 
 function regardeColone(col, tab) {
@@ -159,7 +225,6 @@ function regardeligne(lig, tab) {
     let gagne = true;
     for (let i = 1; i < tailleMorpion; i++) {
         if (tab[lig].value !== tab[lig + i].value) {
-            console.log(lig + i);
             gagne = false;
         }
     }
@@ -184,10 +249,10 @@ function regardeDiagonaleInverse(tab) {
         }
     }
     return gagne;
-
 }
 
 let j = 0;
+
 function button() {
     if (j < 1) {
         let btn = document.createElement("BUTTON");
@@ -195,8 +260,8 @@ function button() {
         btn.appendChild(text);
         document.body.appendChild(btn);
         btn.setAttribute("onclick", "restart()");
-        btn.setAttribute("display","block");
-        btn.setAttribute("margin","auto");
+        btn.setAttribute("display", "block");
+        btn.setAttribute("margin", "auto");
         j++;
     }
 }
@@ -205,6 +270,7 @@ function restart() {
     tabSupp = document.getElementsByTagName("td");
     for (let i = 0; i < tabSupp.length; i++) {
         tabSupp[i].innerText = " ";
+        nb = 0;
     }
     gagne = false;
     finPartie = false;
