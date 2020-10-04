@@ -1,12 +1,16 @@
 
-let j1 = prompt("Veuillez entrer le nom du 1er joueur", "J1");
-let j2 = prompt("Veuillez entrer le nom du 2ème joueur", "J2");
-let tailleGrille;
+let person = prompt("Veuillez entrer le nom du 1er joueur", "Joueur 1");
+let person2 = prompt("Veuillez entrer le nom du 2ème joueur", "Joueur 2");
+let tailleMorpion;
 
 
-
+do {
+    tailleMorpion = prompt("choisissez la taille entre 3 et 8");
+} while (tailleMorpion < 3 || tailleMorpion > 8);
 let mode="simple"
-
+if(confirm("voulez vous jouer en mode complexe")){
+    mode="complexe";
+}
 let score = 0;
 let score2 = 0;
 
@@ -14,33 +18,31 @@ let score2 = 0;
 function copy_value() {
     let tabP = document.getElementsByTagName("p");
     for (let i = 0; i < tabP.length; i++) {
-        tabP[i].innerHTML = j1 + " = " + score + "<br>" + j2 + " = " + score2;
+        tabP[i].innerHTML = person + " = " + score + "<br>" + person2 + " = " + score2;
     }
 }
 
 copy_value();
 
-let body = document.getElementsByTagName("body")[0];
-
-let tbl = document.getElementById("grille");
-
-let tblBody = document.createElement("tbody");
-
 function generate_table() {
-    do {
-        tailleGrille = prompt("choisissez la taille dd la grille de jeu entre 3 et 8");
-    } while (tailleGrille < 3 || tailleGrille > 8);
+    // get the reference for the body
+    let body = document.getElementsByTagName("body")[0];
+    // creates a <table> element and a <tbody> element
+    let tbl = document.createElement("table");
 
-    if(confirm("voulez vous jouer en mode complexe")){
-        mode="complexe";
-    }
+    let tblBody = document.createElement("tbody");
+    // creating all cells
 
     let autoId = 0;
-    for (let i = 0; i < tailleGrille; i++) {
+    for (let i = 0; i < tailleMorpion; i++) {
+        // creates a table row
         let row = document.createElement("tr");
-        for (let j = 0; j < tailleGrille; j++) {
+        for (let j = 0; j < tailleMorpion; j++) {
+            // Create a <td> element and a text node, make the text
+            // node the contents of the <td>, and put the <td> at
+            // the end of the table row
             let cell = document.createElement("td");
-            let taille = 100 / tailleGrille;
+            let taille = 100 / tailleMorpion;
             taille += "%";
             cell.setAttribute("Id", autoId);
             cell.setAttribute("align", "center");
@@ -82,7 +84,7 @@ let gagne = false;
 let finPartie = false;
 
 function getId(id) {
-    let tab = document.getElementsByTagName("td");
+
     let img = document.createElement("img");
     img.setAttribute("width", "40");
     img.setAttribute("height", "40");
@@ -90,12 +92,12 @@ function getId(id) {
     if (finPartie !== true) {
         if (document.getElementById(id).innerHTML === " ") {
             if (x % 2 === 0) {
-                img.src = "croix.png";
+                img.src = "img/cross.cur";
                 block = document.getElementById(id);
                 block.appendChild(img);
                 document.getElementById(id).value = "1";
             } else {
-                img.src = "cercle.jpg";
+                img.src = "img/rond.png";
                 block = document.getElementById(id);
                 block.appendChild(img);
                 document.getElementById(id).value = "2";
@@ -105,10 +107,10 @@ function getId(id) {
         }
 
         //pour compter les point (en test)
-
+        let tab = document.getElementsByTagName("td");
         for (let i = 0; i < tab.length; i++) {
             if (mode !== "simple") {
-                if (parseInt(i / tailleGrille) === 0 && tab[i].value !== undefined && gagne=== false) {
+                if (parseInt(i / tailleMorpion) === 0 && tab[i].value !== undefined) {
 
                     gagne = regardeColone(i, tab);
                 }
@@ -116,31 +118,31 @@ function getId(id) {
                 if (i === 0 && tab[0].value !== undefined && gagne === false) {
                     gagne = regardeDiagonale(tab);
                 }
-                if (i === tailleGrille - 1 && tab[tailleGrille - 1].value !== undefined && gagne === false) {
+                if (i === tailleMorpion - 1 && tab[tailleMorpion - 1].value !== undefined && gagne === false) {
                     gagne = regardeDiagonaleInverse(tab);
                 }
-                if (i % tailleGrille === 0 && tab[i].value !== undefined && gagne === false) {
+                if (i % tailleMorpion === 0 && tab[i].value !== undefined && gagne === false) {
                     gagne = regardeligne(i, tab);
 
                 }
 
             } else {
-                if (parseInt(i / tailleGrille) <= tailleGrille - 3 && tab[i].value !== undefined && gagne === false) {
+                if (parseInt(i / tailleMorpion) <= tailleMorpion - 3 && tab[i].value !== undefined) {
                     gagne = regardeColoneSimple(i, tab);
                 }
-                if (i % tailleGrille <= tailleGrille - 3 && tab[i].value !== undefined && gagne === false) {
+                if (i % tailleMorpion <= tailleMorpion - 3 && tab[i].value !== undefined && gagne === false) {
                     gagne = regardeLigneSimple(i, tab);
                 }
-                if (parseInt(i / tailleGrille) <= tailleGrille - 3 && i % tailleGrille <= tailleGrille - 3 && tab[i].value !== undefined && gagne === false) {
+                if (parseInt(i / tailleMorpion) <= tailleMorpion - 3 && i % tailleMorpion <= tailleMorpion - 3 && tab[i].value !== undefined && gagne === false) {
                     gagne = regardeDiagonaleSimple(i, tab);
                 }
-                if (parseInt(i / tailleGrille) < tailleGrille - 3 && i % tailleGrille > 1 && tab[i].value !== undefined && gagne === false) {
+                if (parseInt(i / tailleMorpion) < tailleMorpion - 3 && i % tailleMorpion > 1 && tab[i].value !== undefined && gagne === false) {
                     gagne = regardeDiagonaleInverseSimple(i, tab);
                 }
             }
-
             if (gagne === true) {
                 if (nb===0 ) {
+                    console.log("test");
                     if (tab[i].value === "1") {
                         score += 1;
                     }
@@ -156,13 +158,7 @@ function getId(id) {
 
 
     }
-    if(finPartie!==true) {
-        finPartie = true;
-        for (let i = 0; i < tab.length; i++) {
-            if (tab[i].value === undefined) finPartie = false;
-
-        }
-    }
+    
     if (finPartie === true) {
         button();
         gagne=false;
@@ -173,8 +169,7 @@ function getId(id) {
 function regardeColoneSimple(col, tab) {
     let gagne = true;
     for (let i = 1; i <= 2; i++) {
-        if (tab[col].value !== tab[col + tailleGrille * i].value) {
-
+        if (tab[col].value !== tab[col + tailleMorpion * i].value) {
             gagne = false;
         }
     }
@@ -194,7 +189,7 @@ function regardeLigneSimple(lig, tab) {
 function regardeDiagonaleSimple(pos, tab) {
     let gagne = true;
     for (let i = 1; i <= 2; i++) {
-        if (tab[pos].value !== tab[pos + tailleGrille * i + i].value) {
+        if (tab[pos].value !== tab[pos + tailleMorpion * i + i].value) {
             gagne = false;
         }
     }
@@ -204,7 +199,7 @@ function regardeDiagonaleSimple(pos, tab) {
 function regardeDiagonaleInverseSimple(pos, tab) {
     let gagne = true;
     for (let i = 1; i <= 2; i++) {
-        if (tab[pos].value !== tab[pos + tailleGrille * i - i].value) {
+        if (tab[pos].value !== tab[pos + tailleMorpion * i - i].value) {
             gagne = false;
         }
     }
@@ -213,8 +208,8 @@ function regardeDiagonaleInverseSimple(pos, tab) {
 
 function regardeColone(col, tab) {
     let gagne = true;
-    for (let i = 1; i < tailleGrille; i++) {
-        if (tab[col].value !== tab[col + tailleGrille * i].value) {
+    for (let i = 1; i < tailleMorpion; i++) {
+        if (tab[col].value !== tab[col + tailleMorpion * i].value) {
             gagne = false;
         }
     }
@@ -223,7 +218,7 @@ function regardeColone(col, tab) {
 
 function regardeligne(lig, tab) {
     let gagne = true;
-    for (let i = 1; i < tailleGrille; i++) {
+    for (let i = 1; i < tailleMorpion; i++) {
         if (tab[lig].value !== tab[lig + i].value) {
             gagne = false;
         }
@@ -233,8 +228,8 @@ function regardeligne(lig, tab) {
 
 function regardeDiagonale(tab) {
     let gagne = true;
-    for (let i = 1; i < tailleGrille; i++) {
-        if (tab[0].value !== tab[tailleGrille * i + i].value) {
+    for (let i = 1; i < tailleMorpion; i++) {
+        if (tab[0].value !== tab[tailleMorpion * i + i].value) {
             gagne = false;
         }
     }
@@ -243,8 +238,8 @@ function regardeDiagonale(tab) {
 
 function regardeDiagonaleInverse(tab) {
     let gagne = true;
-    for (let i = 1; i < tailleGrille; i++) {
-        if (tab[tailleGrille - 1].value !== tab[tailleGrille - 1 + tailleGrille * i - i].value) {
+    for (let i = 1; i < tailleMorpion; i++) {
+        if (tab[tailleMorpion - 1].value !== tab[tailleMorpion - 1 + tailleMorpion * i - i].value) {
             gagne = false;
         }
     }
@@ -252,7 +247,6 @@ function regardeDiagonaleInverse(tab) {
 }
 
 let j = 0;
-
 function button() {
     if (j < 1) {
         let btn = document.createElement("BUTTON");
@@ -267,11 +261,11 @@ function button() {
 }
 
 function restart() {
-    for(let i=tailleGrille-1;i>=0;i--) {
-        document.getElementById("grille").deleteRow(i);
+    tabSupp = document.getElementsByTagName("td");
+    for (let i = 0; i < tabSupp.length; i++) {
+        tabSupp[i].innerText = " ";
+        nb=0;
     }
     gagne = false;
     finPartie = false;
-    nb=0;
-    generate_table();
 }
