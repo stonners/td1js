@@ -57,7 +57,7 @@ export function pairGrand(tab1) {
 }
 
 export function rechercheDicho(tab,rec){
-    if(tab===null)return 0;
+    if(tab===null)return -1;
     let i;
     let bornsup=tab.length;
     let bornif=0;
@@ -76,5 +76,5 @@ export function rechercheDicho(tab,rec){
         i=parseInt((bornsup+bornif)/2);
     }
     //console.log(i);
-    return i;
+    return -1;
 }
