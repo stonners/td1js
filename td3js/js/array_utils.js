@@ -10,7 +10,7 @@ export function addition(tab) {
 
         }
     }
-  //  console.log(calcul);
+    //  console.log(calcul);
     return calcul;
 }
 
@@ -56,24 +56,22 @@ export function pairGrand(tab1) {
     return tmp;
 }
 
-export function rechercheDicho(tab,rec){
-    if(tab===null)return -1;
+export function rechercheDicho(tab, rec) {
+    if (tab === null) return -1;
     let i;
-    let bornsup=tab.length;
-    let bornif=0;
-    let trouve=false;
-    i=parseInt((bornsup+bornif)/2);
-    while(bornif<bornsup){
-        if(tab[i]===rec){
-            return i+1;
+    let bornsup = tab.length;
+    let bornif = 0;
+    let trouve = false;
+    i = parseInt((bornsup + bornif) / 2);
+    while (bornif < bornsup) {
+        if (tab[i] === rec) {
+            return i + 1;
+        } else if (tab[i] > rec) {
+            bornsup = i - 1;
+        } else if (tab[i] < rec) {
+            bornif = i + 1;
         }
-        else if(tab[i]>rec) {
-            bornsup=i-1;
-        }
-        else if(tab[i]<rec) {
-            bornif=i+1;
-        }
-        i=parseInt((bornsup+bornif)/2);
+        i = parseInt((bornsup + bornif) / 2);
     }
     //console.log(i);
     return -1;
