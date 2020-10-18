@@ -1,3 +1,5 @@
+document.getElementById("meteo").style.visibility = "hidden";
+let communeMeteo;
 fetch('https://geo.api.gouv.fr/regions', {
     method: 'GET'
 
@@ -87,9 +89,10 @@ function listCommune(tab) {
     for (let i = 0; i < tab.length; i++) {
         let le3 = document.createElement("option");
         le3.innerHTML = tab[i].nom;
-        let commune2 = [tab[i].nom, tab[i].codesPostaux, tab[i].population];
+        let commune2 = [tab[i].nom, tab[i].codesPostaux, tab[i].population, tab[i].code];
         localStorage.setItem(tab[i].code, commune2);
-        le3.setAttribute('value', tab[i].codesPostaux);
+        le3.setAttribute('value', tab[i].code);
+
 
         commune.appendChild(le3);
     }
@@ -98,34 +101,48 @@ function listCommune(tab) {
 }
 
 function population() {
-
+    let population;
+    let codePost;
     let code = document.getElementById("commune").value;
-    //a refaire
-    if (population !== "undefined") {
-        document.getElementById("population").innerHTML = "La population est de : ";//+population ;
-    } else {
-        document.getElementById("population").innerHTML = "La population est de : pas d'information";
-
-    }
 
 
     let parentTab = document.getElementById("tableau");
     parentTab.innerHTML = "";
     let popuTotal = 0;
+    let trTitre = document.createElement("tr");
+    let tdTitre1 = document.createElement("td");
+    tdTitre1.innerText = "Nom";
+    let tdTitre2 = document.createElement("td");
+    tdTitre2.innerText = "Code postal";
+    let tdTitre3 = document.createElement("td");
+    tdTitre3.innerText = "population";
+    trTitre.appendChild(tdTitre1);
+    trTitre.appendChild(tdTitre2);
+    trTitre.appendChild(tdTitre3);
+    parentTab.appendChild(trTitre);
+
     for (let i = 0; i < localStorage.length; i++) {
         let tr = document.createElement("tr");
 
-        let nombreTr = document.getElementsByTagName("tr");
+
+        let listCommu = localStorage.getItem(localStorage.key(i)).split(",");
 
 
-        listCommu = localStorage.getItem(localStorage.key(i)).split(",");
-        console.log(listCommu);
-        //console.log("code commune:" + commune2[0]);
-        //console.log("code commune:" + commune2[1]);
-        //console.log("code :" + code);
-        if (listCommu[1] == code) {
+        if (listCommu[3] === code) {
+            communeMeteo = listCommu[0];
+            console.log(communeMeteo);
+            codePost = listCommu[1];
+            population = listCommu[2];
+            if (population !== "undefined") {
+                document.getElementById("population").innerHTML = "La population est de : " + population;
+            } else {
+                document.getElementById("population").innerHTML = "La population est de : pas d'information";
+
+            }
+        }
+        if (codePost === listCommu[1]) {
             let tdCommune = document.createElement("td");
-            console.log(listCommu);
+            //console.log(listCommu);
             tdCommune.innerHTML = listCommu[0];
             tr.appendChild(tdCommune);
             let tdCodePost = document.createElement("td");
@@ -135,28 +152,20 @@ function population() {
             tdPopu.innerHTML = listCommu[2];
             tr.appendChild(tdPopu);
             parentTab.appendChild(tr);
-            popuTotal+= parseInt(listCommu[2]);
+            popuTotal += parseInt(listCommu[2]);
         }
     }
     let divPopuTotal = document.getElementById("popuTotal");
     divPopuTotal.innerText = "La population total est de : " + popuTotal;
+    document.getElementById("meteo").style.visibility = "visible";
+    localStorage.setItem("communeMeteo", communeMeteo);
 }
 
+function meteo() {
+    window.location = "./meteo.html"
+}
 
 document.getElementById("region").addEventListener("change", choixDepartement);
 document.getElementById("departement").addEventListener("change", choixCommune);
 document.getElementById("commune").addEventListener("change", population);
-//document.getElementById("commune").addEventListener("change", choixCommune);
-
-/*
-fetch('https://geo.api.gouv.fr/communes/', {
-    method: 'GET'
-
-}).then(response => response.json())
-    .then(json => listCommune(json))
-    .catch(function (err) {
-    console.log("il y a eu un problème avec l'opération fetch : " + err.message);
-});
-
-
-*/
+document.getElementById("meteo").addEventListener("click", meteo);
