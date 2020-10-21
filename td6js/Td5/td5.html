@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TD 5</title>
+    <link rel="stylesheet" href="td5.css"/>
+</head>
+<body>
+<h1>TD n°5</h1>
+
+<select id="regions" onchange="getDepartements(this)">
+
+</select>
+<select id="departements" onchange="getCities(this)">
+
+</select>
+
+<select id="cities" onchange="citySelected(this)">
+
+</select>
+
+<div id="details">
+    <p>Population : <span id="population"></span> habitants.</p>
+    <table>
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Code Postal</th>
+            <th>Population</th>
+        </tr>
+        </thead>
+        <tbody id="tdata"></tbody>
+    </table>
+
+    <p>Population totale : <span id="total"></span> habitants.</p>
+</div>
+
+<button onclick="location.href='./td5_meteo.html'">Voir la météo</button>
+
+<script src="td5_geo.js"></script>
+</body>
+</html>

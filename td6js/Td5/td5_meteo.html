@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TD 5</title>
+    <link rel="stylesheet" href="td5.css"/>
+</head>
+<body>
+<h1>TD n°5</h1>
+
+<h2>Météo à <span id="cityName"></span></h2>
+
+<div id="erreur" style="display: none">
+    <p>Cette ville n'a pas été trouveé par l'API météo.</p>
+</div>
+
+<div id="details">
+    <p>Temps : <span id="temps"></span></p>
+    <p>Pourcentage d'humidité : <span id="pct"></span></p>
+    <p>Température ressentie : <span id="ressentie"></span></p>
+    <p>Température : <span id="temperature"></span></p>
+    <p>Température minimale : <span id="min"></span></p>
+    <p>Température maximale : <span id="max"></span></p>
+</div>
+
+<button onclick="location.href='./td5.html'">Retour</button>
+
+<script src="td5_meteo.js"></script>
+</body>
+</html>
