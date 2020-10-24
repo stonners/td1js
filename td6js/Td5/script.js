@@ -9,28 +9,29 @@ fetch('https://geo.api.gouv.fr/regions', {
     console.log("il y a eu un problème avec l'opération fetch : " + err.message);
 });
 
-let optionDepart = document.createElement("option");
-
-
 function listRegion(tab) {
-    let region = document.getElementById("region");
-    optionDepart.innerHTML = "--Choisir une region--";
-    region.appendChild(optionDepart);
+
+
+    let region = $("#region");
+
+
+    let optionDepart = $("<option></option>").html("--Choisir une region--");
+    $(region).append(optionDepart);
+
 
     for (let i = 0; i < tab.length; i++) {
-        let optionRegion = document.createElement("option");
-        optionRegion.innerHTML = tab[i].nom;
-        optionRegion.setAttribute('value', tab[i].code);
-        region.appendChild(optionRegion);
+        let optionRegion = $("<option></option>").html(tab[i].nom);
+        $(optionRegion).attr('value', tab[i].code);
+        $(region).append(optionRegion);
 
     }
 }
 
 
 function choixDepartement() {
-    let parentTab = document.getElementById("tableau");
-    parentTab.innerHTML = "";
-    let codeRegion = document.getElementById("region").value;
+    let parentTab = $("#tableau").html("");
+    let codeRegion = $("#region").val();
+    console.log(codeRegion)
 
 
     fetch('https://geo.api.gouv.fr/regions/' + codeRegion + '/departements/', {
@@ -45,29 +46,28 @@ function choixDepartement() {
 
 
 function listDepartement(tab) {
-    let departement = document.getElementById("departement");
-    departement.options.length = 0;
-    let commune = document.getElementById("commune");
-    commune.options.length = 0;
-    document.getElementById("population").innerHTML = "";
+    let departement = $("#departement");
+    console.log(departement);
 
-    optionDepart.innerHTML = "--Choisir un département--";
-    departement.appendChild(optionDepart);
+    // departement.options.length = 0;
+    let commune = $("#commune");
+    //commune.options.length = 0;
+    $("#population").html("");
+
+
+    let optionDepart = $("<option></option>").html("--Choisir un département--");
+    $(departement).append(optionDepart);
     for (let i = 0; i < tab.length; i++) {
-        let le2 = document.createElement("option");
-
-
-        le2.innerHTML = tab[i].nom;
-        le2.setAttribute('value', tab[i].code);
-        departement.appendChild(le2);
+        let optionDepartement = $("<option></option>").html(tab[i].nom);
+        $(optionDepartement).attr('value', tab[i].code);
+        $(departement).append(optionDepartement);
     }
 }
 
 
 function choixCommune() {
-    let parentTab = document.getElementById("tableau");
-    parentTab.innerHTML = "";
-    let codeDepartement = document.getElementById("departement").value;
+    let parentTab = $("#tableau").html("");
+    let codeDepartement = $("#departement").val();
 
     fetch('https://geo.api.gouv.fr/departements/' + codeDepartement + '/communes', {
         method: 'GET'
@@ -81,20 +81,24 @@ function choixCommune() {
 
 function listCommune(tab) {
     localStorage.clear();
-    let commune = document.getElementById("commune");
-    commune.options.length = 0;
-    document.getElementById("population").innerHTML = "";
-    optionDepart.innerHTML = "--Choisir une commune--";
-    commune.appendChild(optionDepart);
+    let commune = $("#commune");
+    //commune.options.length = 0;
+    $("population").html("");
+
+    let optionDepart = $("<option></option>").html("--Choisir une commune--");
+    $(commune).append(optionDepart);
+
+
     for (let i = 0; i < tab.length; i++) {
-        let le3 = document.createElement("option");
-        le3.innerHTML = tab[i].nom;
+        let optionCommune = $("<option></option>").html(tab[i].nom);
+        $(optionCommune).attr('value', tab[i].code);
+
         let commune2 = [tab[i].nom, tab[i].codesPostaux, tab[i].population, tab[i].code];
         localStorage.setItem(tab[i].code, commune2);
-        le3.setAttribute('value', tab[i].code);
 
 
-        commune.appendChild(le3);
+        $(commune).append(optionCommune);
+
     }
 
 
@@ -103,12 +107,13 @@ function listCommune(tab) {
 function population() {
     let population;
     let codePost;
-    let code = document.getElementById("commune").value;
+    let code = $("#commune").val();
 
 
-    let parentTab = document.getElementById("tableau");
-    parentTab.innerHTML = "";
+    let parentTab = $("#tableau").html("");
     let popuTotal = 0;
+
+    //iciiiiiiiiiiiiiiiiii
     let trTitre = document.createElement("tr");
     let tdTitre1 = document.createElement("td");
     tdTitre1.innerText = "Nom";

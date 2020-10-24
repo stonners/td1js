@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Morpion JS</title>
+    <link rel="stylesheet" href="../css/morpion.css"/>
+</head>
+<body onload="recommence()">
+<div class="zone_jeu">
+    <p id="score"></p>
+    <p id="messages"></p>
+
+    <table id="table_morpion">
+    </table>
+
+    <div>
+        <label for="taille">Taille de la grille : </label>
+        <input type="text" id="taille" class="saisie_taille" value="3"/>
+        Mode de jeu :
+        <input type="radio" id="simple" name="mode" value="simple">
+        <label for="simple">Simple</label>
+        <input type="radio" id="complet" name="mode" value="Complet" checked="checked">
+        <label for="complet">Complet</label>
+        <input type="button" id="btn_reset" onclick="recommence()" value="Rejouer"/>
+    </div>
+</div>
+
+<script src="../js/morpion.js"></script>
+</body>
+</html>

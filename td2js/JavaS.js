@@ -37,6 +37,7 @@ function changeNumArt() {
         }
         let li1 = document.createElement("h2");
         li1.innerHTML = res;
+
         document.body.replaceChild(li1, tab[i]);
     }
 }

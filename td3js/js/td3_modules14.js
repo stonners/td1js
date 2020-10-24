@@ -29,6 +29,7 @@ function test2() {
     console.log(tab);
     cmder.compteur(tab);
 
+
 }
 
 //test2();
@@ -71,12 +72,14 @@ function test4() {
 }
 
 //test4();
-let k = 2;
-let i = 0;
-let z = 0;
+
+
+let numberElement = 2;
+let idElement = 0;
+let launch = 0;
 
 function ajouterNombre() {
-    let element = "Element " + k++ + " <input type=\"number\" id=\"number" + i + "\">";
+    let element = "Element " + numberElement++ + " <input type=\"number\" id=\"number" + idElement + "\">";
 
     let newP = document.createElement("p");
     newP.innerHTML = element;
@@ -84,21 +87,21 @@ function ajouterNombre() {
     let divParent = newNumber.parentNode;
 
     divParent.insertBefore(newP, newNumber);
-    i++;
+    idElement++;
 }
 
 function afficheFinal() {
     let tab = [];
     let j = 0;
     tab[j] = document.getElementById("number").value;
-    for (j = 0; j < i; j++) {
+    for (j = 0; j < idElement; j++) {
         tab[j + 1] = document.getElementById("number" + j).value;
     }
     //tab a tout les données dans lesquels rechercher
 
     let numberReshearch = document.getElementById("recherche").value;
-    if (tab !== "" && numberReshearch !== "") {
-        if (z === 0) {
+    if (tab.length!== 0 && numberReshearch !== "") {
+        if (launch === 0) {
             let divFinale = document.createElement("div");
             let endDiv = document.getElementById("mainContent");
             divFinale.setAttribute("Id", "divFinale")
@@ -119,6 +122,7 @@ function afficheFinal() {
             let p2 = document.createElement("p");
             p2.innerHTML = text2 + cmder.compteur(tab);
             divFinale.appendChild(p2);
+
             if (cmder.pairGrand(tab) != 0) {
                 let p3 = document.createElement("p");
                 p3.innerHTML = text3 + cmder.pairGrand(tab);
@@ -127,7 +131,7 @@ function afficheFinal() {
             let p4 = document.createElement("p");
             p4.innerHTML = text4 + cmder.rechercheDicho(tab, numberReshearch);
             divFinale.appendChild(p4);
-            z++;
+            launch++;
         }
     }
 }
