@@ -18,32 +18,32 @@ function converKelvinDegres(K){
 
 function donneesMeteo(tab){
     localStorage.clear();
-    let divTemp=document.getElementById("meteoTemp");
-    let ville = document.createElement("p");
-    ville.innerHTML = "Météo de " + commune+ " :<br/>";
-    divTemp.appendChild(ville);
-        let temperature= document.createElement('p');
-    temperature.innerHTML="température : "+converKelvinDegres(parseFloat(tab.main.temp)).toFixed(1)+"°C";
-    divTemp.appendChild(temperature);
+    let divTemp=$("#meteoTemp");
+    let ville = $("<p></p>");
+    $(ville).html("Météo de " + commune+ " :<br/>");
+    $(divTemp).append(ville);
+        let temperature= $("<p></p>");
+    $(temperature).html("température : "+converKelvinDegres(parseFloat(tab.main.temp)).toFixed(1)+"°C");
+    $(divTemp).append(temperature);
 
-    let ressentie= document.createElement('p');
-    ressentie.innerHTML="ressentie : "+converKelvinDegres(parseFloat(tab.main.feels_like)).toFixed(1)+"°C";
-    divTemp.appendChild(ressentie);
+    let ressentie= $("<p></p>");
+    $(ressentie).html("ressentie : "+converKelvinDegres(parseFloat(tab.main.feels_like)).toFixed(1)+"°C");
+    $(divTemp).append(ressentie);
 
-    let tempMin= document.createElement('p');
-    tempMin.innerHTML="minimale : "+converKelvinDegres(parseFloat(tab.main.temp_min)).toFixed(1)+"°C";
-    divTemp.appendChild(tempMin);
+    let tempMin= $("<p></p>");
+    $(tempMin).html("minimale : "+converKelvinDegres(parseFloat(tab.main.temp_min)).toFixed(1)+"°C");
+    (divTemp).append(tempMin);
 
-    let tempMax= document.createElement('p');
-    tempMax.innerHTML="maximale : " +converKelvinDegres(parseFloat(tab.main.temp_max)).toFixed(1)+"°C";
-    divTemp.appendChild(tempMax);
+    let tempMax= $("<p></p>");
+    $(tempMax).html("maximale : " +converKelvinDegres(parseFloat(tab.main.temp_max)).toFixed(1)+"°C");
+    (divTemp).append(tempMax);
 
-    let temps= document.createElement('p');
-    temps.innerHTML="temps : "+tab.weather[0].main;
-    divTemp.appendChild(temps);
+    let temps= $("<p></p>");
+    $(temps).html("temps : "+tab.weather[0].main);
+    $(divTemp).append(temps);
 
-    let humid= document.createElement('p');
-    humid.innerHTML="pourcentage d'humidité : "+parseFloat(tab.main.humidity).toFixed(1)+"%";
-    divTemp.appendChild(humid);
+    let humid= $("<p></p>");
+    humid.html("pourcentage d'humidité : "+parseFloat(tab.main.humidity).toFixed(1)+"%");
+    $(divTemp).append(humid);
 
 }

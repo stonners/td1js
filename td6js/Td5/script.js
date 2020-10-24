@@ -1,4 +1,4 @@
-document.getElementById("meteo").style.visibility = "hidden";
+$("#meteo").css("visibility", "hidden");
 let communeMeteo;
 fetch('https://geo.api.gouv.fr/regions', {
     method: 'GET'
@@ -31,7 +31,6 @@ function listRegion(tab) {
 function choixDepartement() {
     let parentTab = $("#tableau").html("");
     let codeRegion = $("#region").val();
-    console.log(codeRegion)
 
 
     fetch('https://geo.api.gouv.fr/regions/' + codeRegion + '/departements/', {
@@ -47,11 +46,9 @@ function choixDepartement() {
 
 function listDepartement(tab) {
     let departement = $("#departement");
-    console.log(departement);
-
-    // departement.options.length = 0;
+    $(departement).empty();
     let commune = $("#commune");
-    //commune.options.length = 0;
+    $(commune).empty();
     $("#population").html("");
 
 
@@ -82,7 +79,8 @@ function choixCommune() {
 function listCommune(tab) {
     localStorage.clear();
     let commune = $("#commune");
-    //commune.options.length = 0;
+
+    $(commune).empty();
     $("population").html("");
 
     let optionDepart = $("<option></option>").html("--Choisir une commune--");
@@ -105,29 +103,26 @@ function listCommune(tab) {
 }
 
 function population() {
+    let popuTotal = 0;
+    
     let population;
     let codePost;
+
+
     let code = $("#commune").val();
-
-
     let parentTab = $("#tableau").html("");
-    let popuTotal = 0;
 
-    //iciiiiiiiiiiiiiiiiii
-    let trTitre = document.createElement("tr");
-    let tdTitre1 = document.createElement("td");
-    tdTitre1.innerText = "Nom";
-    let tdTitre2 = document.createElement("td");
-    tdTitre2.innerText = "Code postal";
-    let tdTitre3 = document.createElement("td");
-    tdTitre3.innerText = "population";
-    trTitre.appendChild(tdTitre1);
-    trTitre.appendChild(tdTitre2);
-    trTitre.appendChild(tdTitre3);
-    parentTab.appendChild(trTitre);
+    let trTitre = $("<tr></tr>");
+    let tdTitre1 = $("<td></td>").html("Nom");
+    let tdTitre2 = $("<td></td>").html("Code Postal");
+    let tdTitre3 = $("<td></td>").html("Population");
+    $(trTitre).append(tdTitre1);
+    $(trTitre).append(tdTitre2);
+    $(trTitre).append(tdTitre3);
+    $(parentTab).append(trTitre);
 
     for (let i = 0; i < localStorage.length; i++) {
-        let tr = document.createElement("tr");
+        let tr = $("<tr></tr>");
 
 
         let listCommu = localStorage.getItem(localStorage.key(i)).split(",");
@@ -135,34 +130,29 @@ function population() {
 
         if (listCommu[3] === code) {
             communeMeteo = listCommu[0];
-            console.log(communeMeteo);
             codePost = listCommu[1];
             population = listCommu[2];
             if (population !== "undefined") {
-                document.getElementById("population").innerHTML = "La population est de : " + population;
+                $("#population").html("La population est de : " + population);
             } else {
-                document.getElementById("population").innerHTML = "La population est de : pas d'information";
+                $("#population").html("La population est de : pas d'information");
 
             }
         }
         if (codePost === listCommu[1]) {
-            let tdCommune = document.createElement("td");
-            //console.log(listCommu);
-            tdCommune.innerHTML = listCommu[0];
-            tr.appendChild(tdCommune);
-            let tdCodePost = document.createElement("td");
-            tdCodePost.innerHTML = listCommu[1];
-            tr.appendChild(tdCodePost);
-            let tdPopu = document.createElement("td");
-            tdPopu.innerHTML = listCommu[2];
-            tr.appendChild(tdPopu);
-            parentTab.appendChild(tr);
+            let tdCommune = $("<td></td>").html(listCommu[0]);
+            $(tr).append(tdCommune);
+            let tdCodePost = $("<td></td>").html(listCommu[1]);
+            $(tr).append(tdCodePost);
+            let tdPopu = $("<td></td>").html(listCommu[2]);
+            $(tr).append(tdPopu);
+            $(parentTab).append(tr);
             popuTotal += parseInt(listCommu[2]);
         }
     }
-    let divPopuTotal = document.getElementById("popuTotal");
-    divPopuTotal.innerText = "La population total est de : " + popuTotal;
-    document.getElementById("meteo").style.visibility = "visible";
+    let divPopuTotal = $("#popuTotal");
+    $(divPopuTotal).html("La population total est de : " + popuTotal);
+    $("#meteo").css('visibility', "visible");
     localStorage.setItem("communeMeteo", communeMeteo);
 }
 
@@ -170,7 +160,7 @@ function meteo() {
     window.location = "meteo.html"
 }
 
-document.getElementById("region").addEventListener("change", choixDepartement);
-document.getElementById("departement").addEventListener("change", choixCommune);
-document.getElementById("commune").addEventListener("change", population);
-document.getElementById("meteo").addEventListener("click", meteo);
+$("#region").on("change", choixDepartement);
+$("#departement").on("change", choixCommune);
+$("#commune").on("change", population);
+$("#meteo").on("click", meteo);
