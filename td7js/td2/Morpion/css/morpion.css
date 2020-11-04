@@ -1,0 +1,44 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+.joueur1 {
+    color: darkred;
+}
+
+.joueur2 {
+    color: darkgreen;
+}
+
+.saisie_taille {
+    width: 3em;
+}
+
+.case {
+    font-size: 2em;
+    min-width: 50px;
+    min-height: 50px;
+}
+
+#score {
+    font-size: 2em;
+}
+
+#messages {
+    font-size: 1.7em;
+}
+
+.zone_jeu {
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    text-align: center;
+    background-color: lightblue;
+    padding: 15px;
+}
+
+table {
+    border-spacing: 0;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
