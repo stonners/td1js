@@ -1,0 +1,12 @@
+body {
+    margin: 15px;
+}
+
+.form-control {
+    width: 250px;
+}
+
+.custom-select {
+    margin: 5px 5px 5px 0px;
+    width: 250px;
+}

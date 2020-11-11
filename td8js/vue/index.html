@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portefeuille gerald</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<input type="number" class="form-control" id="montant" placeholder="Veuillez saisir votre montant">
+<select class="custom-select" id="devise-select">
+
+</select>
+<select id="methode" class="custom-select">
+    <option value="depot">Déposer</option>
+    <option value="retrait">Retirer</option>
+</select>
+<input type="button" id="validate" value="Valider" class="btn btn-primary">
+<table border="1">
+    <thead>
+    <tr>
+        <th>Monnaie</th>
+        <th>Nombre</th>
+        <th>Taux pour conversion en €</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<div id="totalEuro"></div>
+<div id="error"></div>
+<script src="../js/script.js" type="module"></script>
+</body>
+</html>
